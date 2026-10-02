@@ -1,0 +1,39 @@
+{
+  "name": "@bafx/utils",
+  "version": "0.60.0",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build:code": "tsc",
+    "build:docs": "typedoc --out docs src/index.ts --includeVersion",
+    "build": "npm run build:code && npm run  build:docs",
+    "test": "jest",
+    "testWithCoverage": "jest --ci --reporters=default --reporters=jest-junit --coverage --coverageReporters=cobertura",
+    "lint": "eslint --fix",
+    "check": "npm run lint && npm run build && npm run test"
+  },
+  "dependencies": {
+    "luxon": "^3.5.0"
+  },
+  "devDependencies": {
+    "@bafx/lint-config": "^3.0.1",
+    "@types/jest": "^27.4.1",
+    "@types/luxon": "^3.4.2",
+    "@types/node": "^18.18.3",
+    "eslint": "^9.25.1",
+    "jest": "^28.1.3",
+    "jest-junit": "^13.0.0",
+    "ts-jest": "^28.0.8",
+    "typedoc": "^0.25.8",
+    "typescript": "5.2.2"
+  },
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "volta": {
+    "node": "18.18.0"
+  }
+}
