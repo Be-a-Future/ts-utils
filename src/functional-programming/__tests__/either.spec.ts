@@ -1,7 +1,6 @@
-import { isLeft, isRight, Left, Right } from '@smidhonza/either';
-import { Maybe, either, tryCatch, whenRight } from '../either';
-import { compose } from '@smidhonza/compose';
-import { pipe } from '@smidhonza/pipe';
+import { isLeft, isRight, Left, Right, Maybe, either, tryCatch, whenRight } from '../either';
+import { compose } from '../compose';
+import { pipe } from '../pipe';
 import { prop } from '../../utils';
 
 describe('either constructors and guards', () => {
