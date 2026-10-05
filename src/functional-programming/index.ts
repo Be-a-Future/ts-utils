@@ -1,3 +1,6 @@
-export * from './compose';
 export * from './curry';
-export * from './pipe';
+export * from './either';
+
+export * from '@smidhonza/pipe';
+export * from '@smidhonza/compose';
+export * from '@smidhonza/either';

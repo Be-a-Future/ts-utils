@@ -16,6 +16,9 @@
     "check": "npm run lint && npm run build && npm run test"
   },
   "dependencies": {
+    "@smidhonza/compose": "^1.0.1",
+    "@smidhonza/either": "^1.0.1",
+    "@smidhonza/pipe": "^1.0.1",
     "luxon": "^3.5.0"
   },
   "devDependencies": {

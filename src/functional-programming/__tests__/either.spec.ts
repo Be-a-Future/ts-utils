@@ -1,6 +1,7 @@
-import { either, isLeft, isRight, Left, Right, tryCatch, whenRight } from '../either';
-import { Maybe } from '../interfaces';
-import { compose, pipe } from '../../functional-programming';
+import { isLeft, isRight, Left, Right } from '@smidhonza/either';
+import { Maybe, either, tryCatch, whenRight } from '../either';
+import { compose } from '@smidhonza/compose';
+import { pipe } from '@smidhonza/pipe';
 import { prop } from '../../utils';
 
 describe('either constructors and guards', () => {
@@ -14,8 +15,8 @@ describe('either', () => {
   it('should resolve left branch', () => {
     expect(
       either(
-        (value: string) => `left:${value}`,
-        (value: string) => `right:${value}`,
+        (value) => `left:${value}`,
+        (value) => `right:${value}`,
         Left('error'),
       ),
     ).toEqual('left:error');
@@ -24,8 +25,8 @@ describe('either', () => {
   it('should resolve right branch', () => {
     expect(
       either(
-        (value: string) => `left:${value}`,
-        (value: string) => `right:${value}`,
+        (value) => `left:${value}`,
+        (value) => `right:${value}`,
         Right('ok'),
       ),
     ).toEqual('right:ok');

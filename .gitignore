@@ -3,4 +3,4 @@ build
 docs
 node_modules
 
-./junit.xml
+junit.xml

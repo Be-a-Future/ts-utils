@@ -1,4 +1,4 @@
-import { pipe } from '../functional-programming';
+import { pipe } from '@smidhonza/pipe';
 import { isNumber } from '../typeHelpers';
 import { pad } from '../utils';
 import { DateTime } from 'luxon';

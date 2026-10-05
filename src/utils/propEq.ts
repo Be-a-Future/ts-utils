@@ -1,4 +1,5 @@
-import { curry, pipe } from '../functional-programming';
+import { curry } from '../functional-programming';
+import { pipe } from '@smidhonza/pipe';
 import { equals } from './equals';
 import { prop } from './prop';
 
