@@ -2,6 +2,10 @@
   "name": "@bafx/utils",
   "version": "1.0.1",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Be-a-Future/ts-utils.git"
+  },
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "files": [
