@@ -45,6 +45,7 @@ const activeNames = pipe(users, filter(propEq<User, string>('status', 'active'))
 - [General helpers](#general-helpers)
 - [Types](#types)
 - [Testing helper](#testing-helper)
+- [Contributing](#contributing): [commit messages](#commit-messages), [releases](#releases)
 
 ## Functional programming
 
@@ -459,6 +460,40 @@ npm run check                                # lint + build + test
 ```
 
 Tests live next to the sources in `src/**/__tests__` and run with `TZ=Etc/UTC`.
+
+## Contributing
+
+### Commit messages
+
+Commits must follow [Conventional Commits](https://www.conventionalcommits.org/): `type(optional-scope): description`.
+
+```text
+feat(date): add addWeek helper
+fix: handle empty array in head
+feat!: drop Node 24 support
+```
+
+Allowed types: `feat`, `fix`, `perf`, `refactor`, `docs`, `test`, `build`, `ci`, `chore`, `style`, `revert`.
+
+Messages are checked by [commitlint](https://commitlint.js.org/):
+
+- locally by a husky `commit-msg` hook, installed automatically by `npm install`
+- in CI for every commit in a pull request
+
+To check a message by hand: `echo "feat: something" | npx commitlint`.
+
+### Releases
+
+Every push to `main` that passes lint, tests and build is released by [semantic-release](https://semantic-release.org/). There is no manual version bump or `npm publish`. The version is derived from commit messages since the last release:
+
+| Commit                                       | Example                           | Release                   |
+| -------------------------------------------- | --------------------------------- | ------------------------- |
+| `fix: …`, `perf: …`                          | `fix: handle empty array in head` | patch (`1.0.1` → `1.0.2`) |
+| `feat: …`                                    | `feat(date): add addWeek helper`  | minor (`1.0.1` → `1.1.0`) |
+| `feat!: …` or a `BREAKING CHANGE:` footer    | `feat!: drop Node 24 support`     | major (`1.0.1` → `2.0.0`) |
+| `docs`, `chore`, `refactor`, `test`, `ci`, … | `docs: fix typo in README`        | no release                |
+
+Each release updates `CHANGELOG.md`, tags the commit as `vX.Y.Z`, publishes to npm and creates a GitHub Release.
 
 ## License
 
