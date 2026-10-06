@@ -3,7 +3,7 @@
 Small, typed TypeScript utilities for functional-style code: array helpers, timezone-aware date helpers, `pipe` / `compose` / `curry`, an `Either` type for error handling, type guards, and a few general helpers.
 
 - Written in TypeScript and ships with type declarations
-- Compiled to CommonJS (ES5 target)
+- Compiled to CommonJS (ES2017 target)
 - Most helpers are curried and take the data last, so they work well with `pipe`
 
 ## Installation
@@ -12,7 +12,7 @@ Small, typed TypeScript utilities for functional-style code: array helpers, time
 npm install @bafx/utils
 ```
 
-Requires Node.js 18.18 or newer.
+Requires Node.js 26.10 or newer.
 
 ## Quick start
 
@@ -180,29 +180,29 @@ await getUsername(false); // Left(Error('Authentication error'))
 
 ## Arrays
 
-| Function | Description |
-| --- | --- |
-| `head(array?)` | First element, or `undefined` |
-| `last(array)` | Last element, or `undefined` |
-| `tail(array = [])` | All elements except the first |
-| `cutHead(array)` | `{ head, tail }` |
-| `splitAt(index, array)` | `[before, from]`, splitting at `index` (does not mutate) |
-| `length(array)` | Array length |
-| `isArray(value)` | Type guard for arrays |
-| `isEmpty(array)` | `true` if the array has no elements |
-| `isEmptyOptional(array)` | `true` if the array is `null`, `undefined`, or contains only `null` / `undefined` |
-| `isLast(index, array)` | `true` if `index` is the last index |
-| `toArray(value)` | Wraps a single value in an array; returns arrays unchanged |
-| `uniqueBy(array, keyFn)` | Removes duplicates by key and keeps the first occurrence |
-| `groupBy(array, keyFn)` | Groups into a `Map<key, items[]>` |
-| `groupByAndMap(array, keyFn, mapFn)` | Groups, then maps each group: `Map<key, mapFn(items)>` |
-| `transformMap(map, fn)` | Maps the values of a `Map` and keeps the keys |
-| `map(fn, array)` | Curried `Array.prototype.map` |
-| `filter(fn, array)` | Curried `Array.prototype.filter` |
-| `find(fn, array)` | Curried `Array.prototype.find` |
-| `remove(value, array)` | Curried; removes all elements strictly equal to `value` |
-| `concat(a, b)` | Curried `a.concat(b)` |
-| `prepend(value, array)` | Curried; returns `[value, ...array]` |
+| Function                             | Description                                                                       |
+| ------------------------------------ | --------------------------------------------------------------------------------- |
+| `head(array?)`                       | First element, or `undefined`                                                     |
+| `last(array)`                        | Last element, or `undefined`                                                      |
+| `tail(array = [])`                   | All elements except the first                                                     |
+| `cutHead(array)`                     | `{ head, tail }`                                                                  |
+| `splitAt(index, array)`              | `[before, from]`, splitting at `index` (does not mutate)                          |
+| `length(array)`                      | Array length                                                                      |
+| `isArray(value)`                     | Type guard for arrays                                                             |
+| `isEmpty(array)`                     | `true` if the array has no elements                                               |
+| `isEmptyOptional(array)`             | `true` if the array is `null`, `undefined`, or contains only `null` / `undefined` |
+| `isLast(index, array)`               | `true` if `index` is the last index                                               |
+| `toArray(value)`                     | Wraps a single value in an array; returns arrays unchanged                        |
+| `uniqueBy(array, keyFn)`             | Removes duplicates by key and keeps the first occurrence                          |
+| `groupBy(array, keyFn)`              | Groups into a `Map<key, items[]>`                                                 |
+| `groupByAndMap(array, keyFn, mapFn)` | Groups, then maps each group: `Map<key, mapFn(items)>`                            |
+| `transformMap(map, fn)`              | Maps the values of a `Map` and keeps the keys                                     |
+| `map(fn, array)`                     | Curried `Array.prototype.map`                                                     |
+| `filter(fn, array)`                  | Curried `Array.prototype.filter`                                                  |
+| `find(fn, array)`                    | Curried `Array.prototype.find`                                                    |
+| `remove(value, array)`               | Curried; removes all elements strictly equal to `value`                           |
+| `concat(a, b)`                       | Curried `a.concat(b)`                                                             |
+| `prepend(value, array)`              | Curried; returns `[value, ...array]`                                              |
 
 ```ts
 import { head, last, tail, splitAt, uniqueBy, groupBy, groupByAndMap, toArray, isEmptyOptional } from '@bafx/utils';
@@ -297,7 +297,19 @@ getNow(); // current time as a Date
 ### Arithmetic and ranges
 
 ```ts
-import { addSeconds, addDays, addDay, startOfToday, endOfToday, startOfLastWeek, startOfXDaysBefore, startOfXWeeksBefore, startOfXMonthsBefore, startOfXTimeUnitsBefore, getMonthsArray } from '@bafx/utils';
+import {
+  addSeconds,
+  addDays,
+  addDay,
+  startOfToday,
+  endOfToday,
+  startOfLastWeek,
+  startOfXDaysBefore,
+  startOfXWeeksBefore,
+  startOfXMonthsBefore,
+  startOfXTimeUnitsBefore,
+  getMonthsArray,
+} from '@bafx/utils';
 
 const tz = 'Europe/Prague';
 const date = new Date('2024-03-30T12:00:00Z');
@@ -406,15 +418,15 @@ const values = [1, null, 2, undefined].filter(is); // number[]: [1, 2]
 
 ## Types
 
-| Type | Definition |
-| --- | --- |
-| `Optional<T>` | `T \| undefined` |
-| `Nullable<T>` | `T \| null` |
-| `ValueOf<T>` | `T[keyof T]` |
-| `Either<L, R>` | `Left<L> \| Right<R>` |
-| `Maybe<T>` | `Either<Error, T>` |
-| `TypeGuard<T>` | `(value: unknown) => value is T` |
-| `PartialTypeGuard<T, U extends T>` | `(value: T) => value is U` |
+| Type                               | Definition                       |
+| ---------------------------------- | -------------------------------- |
+| `Optional<T>`                      | `T \| undefined`                 |
+| `Nullable<T>`                      | `T \| null`                      |
+| `ValueOf<T>`                       | `T[keyof T]`                     |
+| `Either<L, R>`                     | `Left<L> \| Right<R>`            |
+| `Maybe<T>`                         | `Either<Error, T>`               |
+| `TypeGuard<T>`                     | `(value: unknown) => value is T` |
+| `PartialTypeGuard<T, U extends T>` | `(value: T) => value is U`       |
 
 ## Testing helper
 
@@ -440,7 +452,8 @@ It throws, so don't call it inside a `try` block that catches the error.
 npm install
 npm test                                     # run all tests
 npx jest src/utils/__tests__/prop.spec.ts    # run one test file
-npm run lint                                 # ESLint (auto-fixes files)
+npm run lint                                 # ESLint check
+npm run lint:fix                             # ESLint with auto-fix
 npm run build                                # compile to build/ and generate API docs into docs/
 npm run check                                # lint + build + test
 ```
