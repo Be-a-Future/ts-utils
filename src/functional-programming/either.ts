@@ -25,11 +25,11 @@ export const either = <L, R, A, B>(leftFn: (left: L) => A, rightFn: (right: R) =
 };
 
 export const whenRight =
-    <L, R, T>(resolve: (value: R) => Promise<T> | T) =>
-        async (value: Either<L, R> | Promise<Either<L, R>>) => {
-          const result = await value;
-          return isRight(result) ? resolve(result.value) : result;
-        };
+  <L, R, T>(resolve: (value: R) => Promise<T> | T) =>
+  async (value: Either<L, R> | Promise<Either<L, R>>) => {
+    const result = await value;
+    return isRight(result) ? resolve(result.value) : result;
+  };
 
 export const tryCatch = async <T>(fn: () => Promise<T>): Promise<Maybe<T>> => {
   try {
