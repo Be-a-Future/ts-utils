@@ -1,6 +1,7 @@
 {
   "name": "@bafx/utils",
   "version": "1.0.1",
+  "license": "MIT",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "files": [
@@ -12,7 +13,8 @@
     "build": "npm run build:code && npm run  build:docs",
     "test": "jest",
     "testWithCoverage": "jest --ci --reporters=default --reporters=jest-junit --coverage --coverageReporters=cobertura",
-    "lint": "eslint --fix",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
     "check": "npm run lint && npm run build && npm run test"
   },
   "dependencies": {
@@ -31,9 +33,13 @@
     "typescript": "5.2.2"
   },
   "engines": {
-    "node": ">=18.18.0"
+    "node": ">=26.10.0"
   },
   "volta": {
-    "node": "18.18.0"
+    "node": "26.10.0"
+  },
+  "allowScripts": {
+    "fsevents@2.3.3": true,
+    "unrs-resolver@1.12.2": true
   }
 }
