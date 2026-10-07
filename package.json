@@ -16,7 +16,7 @@
     "build:docs": "typedoc --out docs src/index.ts --includeVersion",
     "build": "npm run build:code && npm run  build:docs",
     "test": "jest",
-    "testWithCoverage": "jest --ci --reporters=default --reporters=jest-junit --coverage --coverageReporters=cobertura",
+    "test:coverage": "jest --ci --coverage",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "check": "npm run lint && npm run build && npm run test",
