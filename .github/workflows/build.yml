@@ -40,7 +40,24 @@ jobs:
         run: npm run lint
 
       - name: Test
-        run: npm test
+        run: npm run test:coverage
+
+      - name: Coverage summary
+        if: always() && hashFiles('coverage/coverage-summary.json') != ''
+        run: |
+          node -e '
+            const { total } = require("./coverage/coverage-summary.json");
+            const rows = ["statements", "branches", "functions", "lines"].map((k) => `| ${k} | ${total[k].pct}% | ${total[k].covered}/${total[k].total} |`);
+            console.log(["## Test coverage", "", "| Metric | % | Covered |", "| --- | --- | --- |", ...rows].join("\n"));
+          ' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload coverage report
+        if: always() && hashFiles('coverage/**') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/
+          retention-days: 14
 
       - name: Build
         run: npm run build
