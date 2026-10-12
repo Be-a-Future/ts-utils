@@ -32,10 +32,11 @@ export const transformMap = <K, V, R>(source: Map<K, V>, transformer: (value: V,
 export const groupBy = <K, V>(array: V[], groupCb: (item: V) => K) =>
   array.reduce((grouped, element) => {
     const key = groupCb(element);
-    if (!grouped.has(key)) {
-      grouped.set(key, [element]);
+    const group = grouped.get(key);
+    if (group) {
+      group.push(element);
     } else {
-      grouped.get(key)?.push(element);
+      grouped.set(key, [element]);
     }
 
     return grouped;

@@ -452,6 +452,7 @@ It throws, so don't call it inside a `try` block that catches the error.
 ```bash
 npm install
 npm test                                     # run all tests
+npm run test:coverage                        # run tests with coverage (100% threshold)
 npx jest src/utils/__tests__/prop.spec.ts    # run one test file
 npm run lint                                 # ESLint check
 npm run lint:fix                             # ESLint with auto-fix
